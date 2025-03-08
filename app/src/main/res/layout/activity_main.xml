@@ -32,15 +32,17 @@
             android:layout_height="0dp"
             android:layout_margin="10dp"
             android:orientation="vertical">
+
             <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:gravity="center_horizontal"
-            android:text="DANH SÁCH CÁC CÔNG VIỆC"
-            android:text_size="30sp"
-            android:text_style="bold"/>
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:gravity="center_horizontal"
+                android:text="DANH SÁCH CÁC CÔNG VIỆC"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
             <ListView
                 android:id="@+id/listView1"
                 android:layout_width="match_parent"

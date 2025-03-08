@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.sqlitebt.MainActivity;
 import com.example.sqlitebt.R;
 import com.example.sqlitebt.model.NotesModel;
 
@@ -16,11 +18,11 @@ import java.util.List;
 
 public class NotesAdapter extends BaseAdapter {
 
-    private Context context;
+    private MainActivity context;
     private int layout;
     private List<NotesModel> noteList;
 
-    public NotesAdapter(Context context, int layout, List<NotesModel> noteList) {
+    public NotesAdapter(MainActivity context, int layout, List<NotesModel> noteList) {
         this.context = context;
         this.layout = layout;
         this.noteList = noteList;
@@ -47,7 +49,7 @@ public class NotesAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(layout, null);
             viewHolder.textViewNote = (TextView) convertView.findViewById(R.id.textViewNameNote);
-            viewHolder.imageViewDelete = (ImageView) convertView.findViewById(R.id.imageViewEdit);
+            viewHolder.imageViewEdit = (ImageView) convertView.findViewById(R.id.imageViewEdit);
             viewHolder.imageViewDelete = (ImageView) convertView.findViewById(R.id.imageViewDelete);
             convertView.setTag(viewHolder);
         }else{
@@ -55,8 +57,26 @@ public class NotesAdapter extends BaseAdapter {
         }
 
         //Lay gia tri
-        NotesModel notes = noteList.get(position);
+        final NotesModel notes = noteList.get(position);
         viewHolder.textViewNote.setText(notes.getNameNote());
+
+        //Bat su kien nut cap nhat
+        viewHolder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Cập nhật" + notes.getNameNote(), Toast.LENGTH_SHORT).show();
+                //Goi Dialog Trong MainActivity
+                context.DialogCapNhat(notes.getNameNote(),notes.getIdNote());
+            }
+        });
+
+//        //Bat su kien nut Xoa
+//        viewHolder.imageViewDelete.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                context.DialogDelete(notes.getNameNote(), notes.getIdNote());
+//            }
+//        });
 
         return convertView;
     }
