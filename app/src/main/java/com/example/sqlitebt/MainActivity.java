@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
 
         });
-        listView = findViewById(R.id.listView1);
+        listView = findViewById(R.id.listview1);
         arrayList = new ArrayList<>();
         adapter = new NotesAdapter(this, R.layout.row_notes, arrayList);
         listView.setAdapter(adapter);
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Goi ham databaseSQLite
         InitDatabaseSQLite();
-        createDatabaseSQLite();
+        //createDatabaseSQLite();
         databaseSQLite();
     }
 
@@ -74,7 +74,10 @@ public class MainActivity extends AppCompatActivity {
         //Lay du lieu
         Cursor cursor = databaseHandler.GetData("SELECT * FROM Notes");
         while (cursor.moveToNext()){
+            // Thêm dữ liệu vào ArrayList
             String name = cursor.getString(1);
+            int id = cursor.getInt(0);
+            arrayList.add(new NotesModel(id, name));
             Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
         }
         adapter.notifyDataSetChanged();

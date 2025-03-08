@@ -36,6 +36,7 @@ public class NotesAdapter extends BaseAdapter {
     //ViewHolder
     private class ViewHolder{
         TextView textViewNote;
+        ImageView imageViewAdd;
         ImageView imageViewEdit;
         ImageView imageViewDelete;
     }
@@ -51,6 +52,7 @@ public class NotesAdapter extends BaseAdapter {
             viewHolder.textViewNote = (TextView) convertView.findViewById(R.id.textViewNameNote);
             viewHolder.imageViewEdit = (ImageView) convertView.findViewById(R.id.imageViewEdit);
             viewHolder.imageViewDelete = (ImageView) convertView.findViewById(R.id.imageViewDelete);
+            viewHolder.imageViewAdd = (ImageView) convertView.findViewById(R.id.imageViewAdd);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -59,6 +61,15 @@ public class NotesAdapter extends BaseAdapter {
         //Lay gia tri
         final NotesModel notes = noteList.get(position);
         viewHolder.textViewNote.setText(notes.getNameNote());
+
+        //Bat su kien nut add
+        viewHolder.imageViewAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Goi Dialog Trong MainActivity
+                context.DialogThem();
+            }
+        });
 
         //Bat su kien nut cap nhat
         viewHolder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
@@ -70,13 +81,13 @@ public class NotesAdapter extends BaseAdapter {
             }
         });
 
-//        //Bat su kien nut Xoa
-//        viewHolder.imageViewDelete.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view) {
-//                context.DialogDelete(notes.getNameNote(), notes.getIdNote());
-//            }
-//        });
+        //Bat su kien nut Xoa
+        viewHolder.imageViewDelete.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                context.DialogDelete(notes.getNameNote(), notes.getIdNote());
+            }
+        });
 
         return convertView;
     }
